@@ -1,12 +1,13 @@
-spring-2018-seminar-01 <img src="https://raw.githubusercontent.com/slu-dss/fall-2017-seminar-01/sources/logo.png" align="right" />
+spring-2018-seminar-02 <img src="https://raw.githubusercontent.com/slu-dss/fall-2017-seminar-01/sources/logo.png" align="right" />
 ===========================================================
 
 ### Repository Contents
 This repository contains files for:
+-   `spring-2018-seminar-02.Rmd` - R notebook for seminar
+-   `spring-2018-seminar-02.Rproj` - R project for seminar
+-   `spring-2018-seminar-02.pdf` - handout
+-   `students.csv`- seminar data
 -   `.gitignore`
--   `spring-2018-seminar-01.Rmd` - R notebook for seminar
--   `spring-2018-seminar-01.Rproj` - R project for seminar
--   `spring-2018-seminar-01.pdf` - handout
 -   `LICENSE`
 -   `README.md` - seminar resources
 
@@ -15,7 +16,7 @@ This repository contains files for:
 * [User-written Functions](https://www.statmethods.net/management/userfunctions.html) notes from [Quick-R](https://www.statmethods.net/index.html)
 
 ## About the SLU DSS
-### Fall 2017 - Functions & Packages in `R`
+### Spring 2018 - Functions & Packages in `R`
 The four sessions for the Spring 2018 seminar will cover ways to use R for managing research projects. We’ll discuss how to write functions that automate repetitive tasks, how to include those functions in your own package, and how to track your package development work using Git and GitHub.
 
 ### About the SLU Data Science Seminar
