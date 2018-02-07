@@ -3,6 +3,7 @@ spring-2018-seminar-02 <img src="https://raw.githubusercontent.com/slu-dss/fall-
 
 ### Repository Contents
 This repository contains files for:
+-   `gitSlides.pdf` - slides introducing git conceptsa
 -   `spring-2018-seminar-02.Rmd` - R notebook for seminar
 -   `spring-2018-seminar-02.Rproj` - R project for seminar
 -   `spring-2018-seminar-02.pdf` - handout
@@ -14,6 +15,9 @@ This repository contains files for:
 ## Resources
 * [Functions](http://adv-r.had.co.nz/Functions.html) chapter from Hadley Wickham's [Advanced `R`](http://adv-r.had.co.nz)
 * [User-written Functions](https://www.statmethods.net/management/userfunctions.html) notes from [Quick-R](https://www.statmethods.net/index.html)
+
+* [R Package](http://r-pkgs.had.co.nz) by Hadley Wickham
+* [Package Development Cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/package-development.pdf)
 
 ## About the SLU DSS
 ### Spring 2018 - Functions & Packages in `R`
