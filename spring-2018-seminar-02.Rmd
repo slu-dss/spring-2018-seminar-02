@@ -1,0 +1,157 @@
+---
+title: "DSS Spring 2018 Seminar 2"
+authors: Chris & Christy
+output: html_notebook
+---
+
+## Introduction
+This is the second notebook for the Spring 2018 `R` seminar series.
+
+## Dependencies
+We'll need two additional packages for this week: `usethis` and `roxygen2`. Use the `install.packages()` function to install both of these packages:
+
+```{r}
+
+```
+
+Additionally, we'll need to load `dplyr` as well as `stringr`, both of which were installed last week as part of the `tidyverse`. We'll also need to load the `devtools` package that we installed last week. Using the `library()` function to do so:
+
+```{r}
+
+```
+
+## Load Data
+Use the `read.csv()` to load your data into your global enviornment:
+
+```{r}
+students <- read.csv("students.csv", stringsAsFactors = FALSE)
+```
+
+## Function Review
+We'll start this week reviewing the function creation process and the first function we wrote for our package from last week. Then we'll write a second function for our package!
+
+### Function Creation Process
+The basic structure of a function is the following: 
+
+myfunction <- function(argument1, argument2, ... ){
+statements
+return(object)
+}
+
+```{r}
+mysquare <- function(x) {
+  y <- x^2
+  return(y)
+}
+```
+
+Let's try writing another basic function that takes `x` and divides it by 1000 (in `R`, the forward slash (`/`) is used for division):
+
+```{r}
+
+```
+
+### Our Package's First Function
+The function takes a data frame object named `.data`, removes the duplicate id variable, and renames the remaining variables. It uses a "pipeline", which is a programming approach advocated by the `tidyverse` family of packages and `R` users who use it. Each time you see the pipe (`%>%`) operator, think of the word "then"! The `select()` function from `dplyr` is used to remove variables and the `rename()` function is used to rename them.
+
+```{r}
+esp_cleanNames <- function(.data){
+  
+  .data %>%
+    select(-X) %>%
+    rename(id = Identification.Number) %>%
+    rename(fullName = Full.Name) %>%
+    rename(firstName = First.Name) %>%
+    rename(lastName = Last.Name) %>%
+    rename(gender = Gender) %>%
+    rename(spanishCourse = Spanish.Course) %>%
+    rename(sec1010 = SPAN.1010.section) %>%
+    rename(sec1020 = SPAN.1020.section) %>%
+    rename(sec2010 = SPAN.2010.section) %>%
+    rename(classStats = Class.Status) %>%
+    rename(prevStudy = Previous.study) %>%
+    rename(sluSpan = Taken.at.SLU) %>%
+    rename(placement = Placement) %>%
+    rename(placeScore = Placement.score) %>%
+    rename(nativeLang = Native.language) %>%
+    rename(nativeLangOthr = Other.native.language) %>%
+    rename(homeLang = Home.language) %>%
+    rename(homeLangOthr = Other.home.language) %>%
+    rename(major = Major) %>%
+    rename(majorOther = Other.major) %>%
+    rename(minor = Minor) %>%
+    rename(minorOther = Other.minor) %>%
+    rename(spanInterest = Interested.major.minor) %>%
+    rename(community = Community.interaction) %>%
+    rename(work = Work.learning) %>%
+    rename(attHispanic = Attitude.Hispanic.community) %>%
+    rename(attPrior = Attitude.previous.course) %>%
+    rename(attLearn = Attitude.learning.Spanish) %>%
+    rename(interest = Interest.FL) %>%
+    rename(desire = Desire) %>%
+    rename(emplyment = Employment.use) %>%
+    rename(inClass = In.class.feeling) %>%
+    rename(speaking = Speaking.Spanish.feeling) %>%
+    rename(cultures = Cultures.different) %>%
+    rename(proficient = Proficient.useful) -> .data
+  
+  return(.data)
+}
+```
+
+We can test our function like so:
+
+```{r}
+cleanStudents <- esp_cleanNames(students)
+```
+
+### Our Second Function
+We have a variable in our data now named `prevStudy` that gives a sense of students' past experience with Spanish:
+
+```{r}
+table(cleanStudents$prevStudy)
+```
+
+We want to create a variable that only has the first character from this existing variable so that we have a numeric count of the number of years of experience. We'll use the `mutate()` function from `dplyr` along with a function from the `stringr` package designed to pull specific characters from a string - `str_sub()`:
+
+```{r}
+cleanStudents <- mutate(cleanStudents, years = str_sub(prevStudy, 1, 1))
+```
+
+Let's check how that worked:
+
+```{r}
+str(cleanStudents$years)
+```
+
+On one hand, we now have the first chracter like we wanted. On the other, it is still a string! So we would need a slightly more complicated `mutate()` function that wraps `str_sub()` in `as.integer()` **or** we need a pipeline that creates `years` as we did above and then converts years to integer.
+
+```{r}
+cleanStudents %>% 
+  mutate(years = str_sub(prevStudy, 1, 1)) %>%
+  mutate(years = as.integer(years)) -> cleanStudents
+
+str(cleanStudents$years)
+```
+
+There we go! So, let's turn this into a function so that we don't need to worry about this two-step process again. Name your function `esp_cleanYear` and base it on the clean names function we wrote above.
+
+```{r}
+
+```
+
+### Why We Use .data
+`.data` is what the `tidyverse` calls a pronoun - it is a standard way of structuring the data frame argument that allows our functions to be piped:
+
+```{r}
+students %>%
+  esp_cleanNames() %>%
+  esp_cleanYear() -> pipedStudents
+```
+
+## Creating Data for a Package
+Before we duck out of the notebook, we should save our original `students` data as an `.RData` file so that we can include it in our package as a sample data set.
+
+```{r}
+save(students, file="students.RData")
+```
