@@ -8,7 +8,13 @@ output: html_notebook
 This is the second notebook for the Spring 2018 `R` seminar series.
 
 ## Dependencies
-We'll need two additional packages for this week: `usethis` and `roxygen2`. Use the `install.packages()` function to install both of these packages:
+We'll need two additional packages for this week: `usethis` and `roxygen2`. Use the `install.packages()` function to install both of these packages - i.e. `install.packages("usethis")`:
+
+```{r}
+
+```
+
+Once these are installed, you will want to load `usethis` using the `library()` function - i.e. `library(usethis)`:
 
 ```{r}
 
@@ -150,9 +156,9 @@ students %>%
 ```
 
 ## Creating Data for a Package
-Before we duck out of the notebook, we should save our original `students` data as an `.RData` file so that we can include it in our package as a sample data set.
+Before we duck out of the notebook, we should save our original `students` data as an `.rda` file so that we can include it in our package as a sample data set. We'll use the `usethis` package to do this:
 
 ```{r}
-save(students, file="students.RData")
+use_data(students)
 ```
  
